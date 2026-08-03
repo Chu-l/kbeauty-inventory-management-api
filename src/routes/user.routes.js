@@ -16,7 +16,9 @@ const {
 } = require("../schemas/user.schema");
 
 // Creates a new router instance
-const router = Router();
+const router = Router({
+  caseSensitive: false,
+});
 
 // Public routes
 router.post("/register", validate(registerSchema), userController.register);

@@ -15,7 +15,9 @@ const {
 } = require("../schemas/product.schema");
 
 // Creates a new router instance
-const router = Router();
+const router = Router({
+  caseSensitive: false,
+});
 
 // Public routes
 router.get("/", productController.getAll);

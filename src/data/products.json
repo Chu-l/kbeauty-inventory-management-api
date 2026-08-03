@@ -1,0 +1,28 @@
+{
+  "products": [
+    {
+      "id": "96647e7f-26cc-42ac-9df4-079cd3196f17",
+      "name": "MEDICUBE PDRN Pink Collagen Capsule Cream 55g",
+      "description": "The Medicube PDRN Pink Collagen Capsule Cream is a dual-texture Korean skincare moisturizer featuring encapsulated pink collagen capsules in a transparent hydrating gel. It utilizes salmon-derived PDRN, 5% niacinamide, and hyaluronic acid to deliver deep hydration, improve skin elasticity, and create a luminous glass-skin glow.",
+      "price": 71999,
+      "stock": 33,
+      "createdAt": "2026-08-03T03:23:50.668Z"
+    },
+    {
+      "id": "e8c2425d-8202-42cc-a6e6-a14d17d59820",
+      "name": "SKIN1004 Madagascar Centella Poremizing Fresh Ampoule 50ml",
+      "description": "The SKIN1004 Madagascar Centella Poremizing Fresh Ampoule is a 50ml pore-clarifying facial serum formulated with Himalayan pink salt, Madagascar Centella Asiatica, and a 9-peptide complex. It deeply purges pore impurities, controls excess sebum, and restores skin elasticity for a smoother, tighter complexion.",
+      "price": 42899,
+      "stock": 50,
+      "createdAt": "2026-08-03T03:26:02.848Z"
+    },
+    {
+      "id": "db46b454-e40b-45ec-b81b-c8eb82a60f1b",
+      "name": "BEAUTY OF JOSEON Glow Replenishing Rice Milk 150ml",
+      "description": "A hydrating, balancing toner with an innovative dual-layer formula that helps intensely moisturize while balancing sebum for skin that's glowy, not greasy.",
+      "price": 52199,
+      "stock": 25,
+      "createdAt": "2026-08-03T03:28:49.853Z"
+    }
+  ]
+}

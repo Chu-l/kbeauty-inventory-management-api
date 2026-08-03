@@ -1,0 +1,10 @@
+{
+  "users": [
+    {
+      "id": "3ab3ef30-e5dc-4ef9-9b9b-eba59b754f4d",
+      "email": "lilen.chu@gmail.com",
+      "password": "$2a$10$5s3xZnoCiivUdOVFOOuuBO.1WRYmdumBrm8K2iEyrAGDjYdrmjreu",
+      "createdAt": "2026-08-02T22:44:23.511Z"
+    }
+  ]
+}

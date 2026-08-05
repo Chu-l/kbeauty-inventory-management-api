@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -32,4 +32,92 @@
     <script src="./app.js"></script>
 </body>
 
+</html>
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="./style.css" />
+
+    <title>K-Beauty Inventory Manager</title>
+
+    <link
+      rel="icon"
+      href="https://img.magnific.com/free-vector/floral-k-letter-font-romantic-typography_53876-116758.jpg"
+    />
+  </head>
+
+  <body>
+    <!-- Header -->
+    <header>
+      <nav class="navbar">
+        <div class="logo-container">
+          <img
+            src="https://img.magnific.com/free-vector/floral-k-letter-font-romantic-typography_53876-116758.jpg"
+            alt="K-Beauty Inventory Manager Logo"
+            id="logo"
+          />
+
+          <div>
+            <h1>K-Beauty Inventory Manager</h1>
+            <span>Inventory Dashboard</span>
+          </div>
+        </div>
+
+        <div class="nav-buttons">
+          <a href="./pages/login.html">
+            <button class="btn-secondary">Log In</button>
+          </a>
+
+          <a href="./pages/register.html">
+            <button class="btn-primary">Register</button>
+          </a>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+      <h2>Manage your K-Beauty inventory with ease</h2>
+
+      <p>
+        Track products, monitor stock levels and keep your inventory organized.
+      </p>
+    </section>
+
+    <!-- Dashboard -->
+    <section class="stats">
+
+      <div class="stat-card">
+        <h3 id="total-products">0</h3>
+        <p>Products</p>
+      </div>
+
+      <div class="stat-card">
+        <h3 id="low-stock">0</h3>
+        <p>Low Stock</p>
+      </div>
+
+      <div class="stat-card">
+        <h3 id="inventory-value">$0</h3>
+        <p>Total Value</p>
+      </div>
+
+    </section>
+
+    <!-- Products -->
+    <main>
+
+      <section id="product-list" class="products-grid">
+
+      </section>
+
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
 </html>

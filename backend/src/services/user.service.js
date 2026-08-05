@@ -11,7 +11,7 @@ const { createUser } = require("../models/user.model");
 const register = async ({ email, password }) => {
   const db = readDB("users.json");
 
-   // Checks if the email is already registered
+  // Checks if the email is already registered
   const exists = db.users.find((user) => user.email === email);
 
   if (exists) {
@@ -20,13 +20,17 @@ const register = async ({ email, password }) => {
     throw error;
   }
 
-   // Hashes the password
+  // Hashes the password
   const hashedPassword = await bcrypt.hash(password, 10);
   // Creates a new user with the hashed password
-  const newUser = createUser({ email, password: hashedPassword });
+  const newUser = createUser({
+    email,
+    password: hashedPassword,
+    role: "user",
+  });
 
   // Saves the new user
-  db.users.push(newUser); 
+  db.users.push(newUser);
   writeDB("users.json", db);
 
   // Returns the user without the password
@@ -58,9 +62,15 @@ const login = async ({ email, password }) => {
 
   // Generates a JWT token
   const token = jwt.sign(
-    { id: user.id, email: user.email },
+    {
+      id: user.id,
+      email: user.email,
+      role: user.role,
+    },
     process.env.JWT_SECRET,
-    { expiresIn: "24h" }
+    {
+      expiresIn: "24h"
+    }
   );
 
   return { token };

@@ -6,7 +6,7 @@ const productController = require("../controllers/product.controller");
 
 // Imports the validation and authentication middlewares
 const { validate } = require("../middlewares/validate.middleware");
-const { authenticate } = require("../middlewares/auth.middleware");
+const { authenticate, isAdmin } = require("../middlewares/auth.middleware");
 
 // Imports the validation schemas
 const {
@@ -27,16 +27,23 @@ router.get("/:id", productController.getById);
 router.post(
   "/",
   authenticate,
+  isAdmin,
   validate(createProductSchema),
   productController.create
 );
 router.put(
   "/:id",
   authenticate,
+  isAdmin,
   validate(updateProductSchema),
   productController.update
 );
-router.delete("/:id", authenticate, productController.remove);
+router.delete(
+  "/:id", 
+  authenticate,
+  isAdmin, 
+  productController.remove
+);
 
 // Exports the product routes
 module.exports = router;

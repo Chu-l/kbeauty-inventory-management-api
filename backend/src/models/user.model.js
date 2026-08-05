@@ -2,10 +2,11 @@
 const { v4: uuidv4 } = require("uuid");
 
 // Creates a new user object
-const createUser = ({ email, password }) => ({
+const createUser = ({ email, password, role = "user" }) => ({
   id: uuidv4(),
   email,
   password,
+  role,
   createdAt: new Date().toISOString(),
 });
 

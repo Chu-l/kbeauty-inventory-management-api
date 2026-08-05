@@ -27,5 +27,15 @@ const authenticate = (req, res, next) => {
     }
 };
 
+// Allows access only to administrators
+const isAdmin = (req, res, next) => {
+  if (req.user.role !== "admin") {
+    return res.status(403).json({
+      message: "Access denied",
+    });
+  }
+  next();
+};
+
 // Exports the authentication middleware
-module.exports = { authenticate };
+module.exports = { authenticate, isAdmin };

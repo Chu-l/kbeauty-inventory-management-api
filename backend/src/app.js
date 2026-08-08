@@ -5,6 +5,9 @@ require("dotenv").config();
 // Imports the Express framework
 const express = require("express");
 
+// Imports cors
+const cors = require("cors");
+
 // Imports the routes related to users and products
 const userRoutes = require("./routes/user.routes");
 const productRoutes = require("./routes/product.routes");
@@ -15,8 +18,8 @@ const { errorHandler } = require("./middlewares/error.middleware");
 // Imports the middleware responsible for handling errors
 const app = express();
 
-// Middleware that automatically parses incoming JSON data
-// and stores it in req.body
+// Middleware
+app.use(cors());
 app.use(express.json());
 
 // Registers all user routes under the "/api/users" path

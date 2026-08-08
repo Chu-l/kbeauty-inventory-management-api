@@ -23,6 +23,14 @@
       "price": 52199,
       "stock": 25,
       "createdAt": "2026-08-03T03:28:49.853Z"
+    },
+    {
+      "id": "aab9a5e5-dbb6-4fb3-a305-425cacc68c89",
+      "name": "COSRX Snail Mucin",
+      "description": "Hydrating essence",
+      "price": 25000,
+      "stock": 15,
+      "createdAt": "2026-08-07T23:04:03.900Z"
     }
   ]
 }

@@ -7,7 +7,7 @@ form.addEventListener("submit", async (event) => {
   const password = document.getElementById("password").value;
 
   try {
-    const response = await fetch("http://localhost:3000/api/users/login", {
+    const response = await fetch("http://localhost:3000/api/users/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

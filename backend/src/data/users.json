@@ -6,6 +6,13 @@
       "password": "$2a$10$5s3xZnoCiivUdOVFOOuuBO.1WRYmdumBrm8K2iEyrAGDjYdrmjreu",
       "role": "user",
       "createdAt": "2026-08-02T22:44:23.511Z"
+    },
+    {
+      "id": "9f627d29-7eb5-4648-9eb3-31e2cbc619a1",
+      "email": "admin@gmail.com",
+      "password": "$2a$10$zrI49/Tpv8qT8suewbK4MO.GgD8UovwahCfF0dyhTzYvYLHtO7IJq",
+      "role": "admin",
+      "createdAt": "2026-08-07T23:01:32.624Z"
     }
   ]
 }

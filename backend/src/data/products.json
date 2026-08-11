@@ -13,7 +13,7 @@
       "name": "SKIN1004 Madagascar Centella Poremizing Fresh Ampoule 50ml",
       "description": "The SKIN1004 Madagascar Centella Poremizing Fresh Ampoule is a 50ml pore-clarifying facial serum formulated with Himalayan pink salt, Madagascar Centella Asiatica, and a 9-peptide complex. It deeply purges pore impurities, controls excess sebum, and restores skin elasticity for a smoother, tighter complexion.",
       "price": 42899,
-      "stock": 50,
+      "stock": 40,
       "createdAt": "2026-08-03T03:26:02.848Z"
     },
     {
@@ -25,12 +25,12 @@
       "createdAt": "2026-08-03T03:28:49.853Z"
     },
     {
-      "id": "aab9a5e5-dbb6-4fb3-a305-425cacc68c89",
-      "name": "COSRX Snail Mucin",
-      "description": "Hydrating essence",
-      "price": 25000,
+      "id": "f4abeae1-dba8-464c-8638-cf44be5c1ee6",
+      "name": "MEDICUBE PDRN Pink Peptide Eye Cream (30 ml)",
+      "description": "An eye contour cream designed to diminish dark circles, reduce wrinkles, and improve firmness using anti-aging ingredients such as retinol, peptides, niacinamide, and Salmon DNA (PDRN). It deeply hydrates, reduces dark circles and fine lines, and provides a firm, luminous \"glass skin\" effect.",
+      "price": 44999,
       "stock": 15,
-      "createdAt": "2026-08-07T23:04:03.900Z"
+      "createdAt": "2026-08-11T02:22:06.049Z"
     }
   ]
 }

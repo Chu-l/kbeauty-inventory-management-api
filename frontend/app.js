@@ -4,6 +4,15 @@ const $productList = document.getElementById("product-list");
 const $adminActions = document.getElementById("admin-actions");
 const $addProduct = document.getElementById("add-product");
 
+const $productForm = document.getElementById("product-form");
+const $cancelProduct = document.getElementById("cancel-product");
+
+const $productFormTitle =
+  document.getElementById("product-form-title");
+
+const $productFormSubmit =
+  document.getElementById("product-form-submit");
+
 // Gets the dashboard cards
 const $totalProducts = document.getElementById("total-products");
 const $lowStock = document.getElementById("low-stock");
@@ -47,6 +56,140 @@ if (!isAdmin) {
   $adminActions.style.display = "none";
 }
 
+let editingProductId = null;
+
+const editProduct = async (productId) => {
+  try {
+    const response = await fetch(
+      `http://localhost:3000/api/products/${productId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    const product = await response.json();
+
+    if (!response.ok) {
+      throw new Error(
+        product.message || "Could not get product"
+      );
+    }
+
+    editingProductId = productId;
+
+    document.getElementById("product-name").value =
+      product.name;
+
+    document.getElementById("product-description").value =
+      product.description;
+
+    document.getElementById("product-price").value =
+      product.price;
+
+    document.getElementById("product-stock").value =
+      product.stock;
+
+    $productFormTitle.textContent = "Edit Product";
+    $productFormSubmit.textContent = "Save Changes";
+
+    $productForm.style.display = "block";
+
+    $productForm.scrollIntoView({
+      behavior: "smooth",
+      block: "center",
+    });
+  } catch (error) {
+    console.error(error);
+    alert(error.message);
+  }
+};
+
+if (isAdmin) {
+  $addProduct.addEventListener("click", () => {
+    editingProductId = null;
+
+    $productFormTitle.textContent = "Add Product";
+    $productFormSubmit.textContent = "Add Product";
+
+    $productForm.reset();
+    $productForm.style.display = "block";
+  });
+
+  $cancelProduct.addEventListener("click", () => {
+    $productForm.style.display = "none";
+    $productForm.reset();
+  });
+
+  document.addEventListener("click", (e) => {
+    if (e.target.classList.contains("edit-button")) {
+      const productId = e.target.dataset.id;
+
+      editProduct(productId);
+    }
+  });
+
+  //Form Submit
+  $productForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const name = document.getElementById("product-name").value;
+    const description = document.getElementById("product-description").value;
+    const price = Number(document.getElementById("product-price").value);
+    const stock = Number(document.getElementById("product-stock").value);
+
+    try {
+      const url = editingProductId
+        ? `http://localhost:3000/api/products/${editingProductId}`
+        : "http://localhost:3000/api/products";
+
+      const method = editingProductId ? "PUT" : "POST";
+
+      const response = await fetch(url, {
+        method,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          name,
+          description,
+          price,
+          stock,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(
+          data.message ||
+          (editingProductId
+            ? "Could not update product"
+            : "Could not create product")
+        );
+      }
+
+      alert(
+        editingProductId
+          ? "Product updated successfully!"
+          : "Product added successfully!"
+      );
+
+      $productForm.reset();
+      $productForm.style.display = "none";
+
+      editingProductId = null;
+
+      loadProducts();
+    } catch (error) {
+      console.error(error);
+      alert(error.message);
+    }
+  });
+}
+
 // Logout
 $logout.addEventListener("click", () => {
   localStorage.removeItem("token");
@@ -79,8 +222,8 @@ const renderProducts = (products) => {
     const adminButtons = isAdmin
       ? `
       <div class="product-actions">
-        <button class="edit-button">Edit</button>
-        <button class="delete-button">Delete</button>
+        <button class="edit-button" data-id="${product.id}">Edit</button>
+        <button class="delete-button" data-id="${product.id}">Delete</button>
       </div>
     `
       : "";
@@ -107,6 +250,47 @@ const renderProducts = (products) => {
     `;
   });
 };
+
+// Delete product
+const deleteProduct = async (productId) => {
+  const confirmed = confirm("Are you sure you want to delete this product?");
+
+  if (!confirmed) {
+    return;
+  }
+
+  try {
+    const response = await fetch(
+      `http://localhost:3000/api/products/${productId}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    
+    if (!response.ok) {
+      const data = await response.json();
+      throw new Error(data.message || "Could not delete product");
+    }
+
+    alert("Product deleted successfully!");
+
+    loadProducts();
+  } catch (error) {
+    console.error(error);
+    alert(error.message);
+  }
+};
+
+document.addEventListener("click", (e) => {
+  if (e.target.classList.contains("delete-button")) {
+    const productId = e.target.dataset.id;
+
+    deleteProduct(productId);
+  }
+});
 
 // Updates the dashboard statistics
 const updateDashboard = (products) => {

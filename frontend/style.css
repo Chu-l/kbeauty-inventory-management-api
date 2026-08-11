@@ -424,3 +424,43 @@ font-size:2rem;
 #logged-user {
   display: none;
 }
+
+/* ---------- Admin Products ---------- */
+
+.product-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.edit-button,
+.delete-button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.edit-button {
+  background-color: #e9a3c1;
+  color: #fff;
+}
+
+.delete-button {
+  background-color: #e57373;
+  color: #fff;
+}
+
+.edit-button:hover,
+.delete-button:hover {
+  opacity: 0.85;
+}
+
+.admin-actions {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1.5rem;
+}

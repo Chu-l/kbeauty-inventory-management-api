@@ -432,15 +432,14 @@ node_modules/
 .env
 ```
 
-## Future Deployment
+## Deployment
 
-The backend API will be deployed using Render.
+The backend API is deployed on Render.
 
-The deployed API URL will be added here once the deployment is completed:
+API URL:
 
-```text
-https://YOUR-API-URL.onrender.com
-```
+https://kbeauty-inventory-management-api.onrender.com
+
 
 ## Author
 

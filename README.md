@@ -1,44 +1,79 @@
-# K-Beauty Inventory Management API
+# K-Beauty Inventory Manager
 
-A REST API built with Node.js and Express for managing a K-Beauty inventory. It supports user authentication with JWT and product management using CRUD operations.
+Web application for managing a K-Beauty product inventory.
 
----
+The project consists of a REST API developed with Node.js and Express, and a static frontend developed with HTML, CSS and JavaScript.
 
-# Features
+## Project Structure
 
-- User registration
-- User authentication (JWT)
-- Product CRUD
-- Request validation with Zod
-- Password hashing with bcrypt
-- JSON file storage
-- Error handling middleware
+```text
+clase20260713/
+│
+├── backend/
+│   ├── src/
+│   │   ├── controllers/
+│   │   ├── data/
+│   │   ├── middlewares/
+│   │   ├── routes/
+│   │   ├── services/
+│   │   └── app.js
+│   │
+│   ├── .env
+│   ├── .gitignore
+│   ├── package.json
+│   └── pnpm-lock.yaml
+│
+└── frontend/
+    ├── pages/
+    │   ├── login.html
+    │   ├── login.js
+    │   ├── register.html
+    │   └── register.js
+    │
+    ├── index.html
+    ├── style.css
+    └── app.js
+```
 
----
+## Technologies
 
-# Technologies
+### Backend
 
 - Node.js
-- Express.js
-- JWT
+- Express
+- JWT (JSON Web Token)
 - bcryptjs
 - Zod
 - UUID
+- dotenv
+- CORS
 
----
+### Frontend
 
-# Installation
+- HTML5
+- CSS3
+- JavaScript
+- Fetch API
+- LocalStorage
+
+### Tools
+
+- Postman
+- Git
+- GitHub
+
+## Installation
 
 Clone the repository:
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/kbeauty-inventory-management-api.git
+git clone YOUR_GITHUB_REPOSITORY_URL
 ```
 
-Go to the project folder:
+Go to the backend folder:
 
 ```bash
-cd kbeauty-inventory-management-api
+cd backend
 ```
 
 Install the dependencies:
@@ -47,17 +82,9 @@ Install the dependencies:
 pnpm install
 ```
 
-or
+## Environment Variables
 
-```bash
-npm install
-```
-
----
-
-# Environment Variables
-
-Create a `.env` file based on `example.env`.
+Create a `.env` file inside the `backend` folder.
 
 Example:
 
@@ -66,308 +93,355 @@ PORT=3000
 JWT_SECRET=your_secret_key
 ```
 
----
+The `.env` file contains sensitive information and must not be uploaded to GitHub.
 
-# Run the Server
+## Running the Backend
 
-Using pnpm:
+To start the server:
 
 ```bash
 pnpm start
 ```
 
-or using npm:
+For development with Nodemon:
 
 ```bash
-npm start
+pnpm dev
 ```
 
-The server will run at:
+The API will be available at:
 
 ```text
 http://localhost:3000
 ```
 
----
+## Frontend
 
-# API Documentation
+The frontend is located in the `frontend` folder.
 
-See the complete API documentation below.
+It provides:
 
-- [User Endpoints](#user-endpoints)
-- [Product Endpoints](#product-endpoints)
+- Product inventory dashboard
+- Product listing
+- User registration
+- User login
+- Logged-in user information
+- Logout
+- Admin product management
+- Add product
+- Edit product
+- Delete product
+- Stock information
+- Inventory statistics
 
+The frontend communicates with the backend API using the Fetch API.
 
-## Base URL
+## Authentication
 
-```text
-http://localhost:3000/api
-```
+The application uses JWT for authentication.
 
----
+When a user logs in successfully, the server returns a JWT token.
 
-# User Endpoints
-
-## Register a New User
-
-Creates a new user account.
-
-**Method**
-
-```http
-POST /users/register
-```
-
-**URL**
-
-```text
-http://localhost:3000/api/users/register
-```
-
-**Body (JSON)**
-
-```json
-{
-  "email": "john@example.com",
-  "password": "123456"
-}
-```
-
----
-
-## Login
-
-Authenticates a user and returns a JWT token.
-
-**Method**
-
-```http
-POST /users/login
-```
-
-**URL**
-
-```text
-http://localhost:3000/api/users/login
-```
-
-**Body (JSON)**
-
-```json
-{
-  "email": "john@example.com",
-  "password": "123456"
-}
-```
-
-**Response**
-
-```json
-{
-  "token": "your_jwt_token"
-}
-```
-
-Copy the token and use it in the Authorization tab of Postman.
-
-- Authorization
-- Type: **Bearer Token**
-- Paste the JWT token in the **Token** field.
-
----
-
-## Get All Users
-
-Returns all registered users.
-
-> Authentication required.
-
-**Method**
-
-```http
-GET /users
-```
-
-**URL**
-
-```text
-http://localhost:3000/api/users
-```
-
----
-
-## Get User by ID
-
-Returns a specific user.
-
-> Authentication required.
-
-**Method**
-
-```http
-GET /users/:id
-```
+The token is stored in the browser's `localStorage` and is sent to protected API endpoints using the `Authorization` header.
 
 Example:
 
-```text
-http://localhost:3000/api/users/USER_ID
+```http
+Authorization: Bearer <token>
 ```
 
----
+## User Roles
 
-## Update User
+The application supports two user roles:
 
-Updates an existing user.
+- `user`
+- `admin`
 
-> Authentication required.
+### User
 
-**Method**
+Regular users can:
+
+- Log in
+- View products
+- Search/view the inventory
+
+### Admin
+
+Administrators can:
+
+- View products
+- Add products
+- Edit products
+- Delete products
+
+The admin-only routes are protected using the `isAdmin` middleware.
+
+## API Endpoints
+
+### Users
+
+#### Register
 
 ```http
-PUT /users/:id
+POST /api/users/register
 ```
 
-**Example Body**
+Example request:
 
 ```json
 {
-  "email": "newemail@example.com"
+  "email": "user@example.com",
+  "password": "password123"
 }
 ```
 
----
-
-## Delete User
-
-Deletes a user.
-
-> Authentication required.
-
-**Method**
+#### Login
 
 ```http
-DELETE /users/:id
+POST /api/users/login
 ```
 
----
-
-# Product Endpoints
-
-## Get All Products
-
-Returns all products.
-
-> Public endpoint. Authentication is not required.
-
-**Method**
-
-```http
-GET /products
-```
-
-**URL**
-
-```text
-http://localhost:3000/api/products
-```
-
----
-
-## Get Product by ID
-
-Returns a specific product.
-
-> Public endpoint. Authentication is not required.
-
-**Method**
-
-```http
-GET /products/:id
-```
-
-Example:
-
-```text
-http://localhost:3000/api/products/PRODUCT_ID
-```
-
----
-
-## Create Product
-
-Creates a new product.
-
-> Authentication required.
-
-**Method**
-
-```http
-POST /products
-```
-
-**URL**
-
-```text
-http://localhost:3000/api/products
-```
-
-**Body (JSON)**
+Example request:
 
 ```json
 {
-  "name": "Beauty of Joseon Relief Sun",
-  "description": "SPF 50+ sunscreen with rice and probiotics.",
-  "price": 52199,
+  "email": "user@example.com",
+  "password": "password123"
+}
+```
+
+A successful login returns a JWT token.
+
+---
+
+# Products
+
+## Get all products
+
+```http
+GET /api/products
+```
+
+Returns the list of products.
+
+Example response:
+
+```json
+[
+  {
+    "id": "123",
+    "name": "COSRX Snail Mucin",
+    "description": "Hydrating essence",
+    "price": 25000,
+    "stock": 15
+  }
+]
+```
+
+## Add a product
+
+```http
+POST /api/products
+```
+
+**Requires authentication and admin role.**
+
+Example request:
+
+```json
+{
+  "name": "COSRX Snail Mucin",
+  "description": "Hydrating essence",
+  "price": 25000,
+  "stock": 15
+}
+```
+
+The request must include the JWT:
+
+```http
+Authorization: Bearer <admin_token>
+```
+
+## Edit a product
+
+```http
+PUT /api/products/:id
+```
+
+**Requires authentication and admin role.**
+
+Example:
+
+```http
+PUT /api/products/123
+```
+
+Example request:
+
+```json
+{
+  "name": "COSRX Snail Mucin Advanced",
+  "description": "Hydrating and repairing essence",
+  "price": 28000,
   "stock": 20
 }
 ```
 
----
-
-## Update Product
-
-Updates an existing product.
-
-> Authentication required.
-
-**Method**
+The request must include the JWT:
 
 ```http
-PUT /products/:id
+Authorization: Bearer <admin_token>
 ```
 
-**Example Body**
-
-```json
-{
-  "price": 20,
-  "stock": 35
-}
-```
-
----
-
-## Delete Product
-
-Deletes a product.
-
-> Authentication required.
-
-**Method**
+## Delete a product
 
 ```http
-DELETE /products/:id
+DELETE /api/products/:id
 ```
 
----
+**Requires authentication and admin role.**
 
-# Authentication
+Example:
 
-Protected endpoints require a valid JWT token.
+```http
+DELETE /api/products/123
+```
 
-In Postman:
+The request must include the JWT:
 
-1. Open the **Authorization** tab.
-2. Select **Bearer Token**.
-3. Paste the token obtained from the **Login** endpoint.
+```http
+Authorization: Bearer <admin_token>
+```
+
+Before deleting a product, the frontend asks the administrator for confirmation.
+
+## Middleware
+
+The backend uses authentication and authorization middleware.
+
+### authenticate
+
+Checks whether the request contains a valid JWT token.
+
+### isAdmin
+
+Checks whether the authenticated user has the `admin` role.
+
+Example:
+
+```javascript
+const isAdmin = (req, res, next) => {
+  if (req.user.role !== "admin") {
+    return res.status(403).json({
+      message: "Access denied"
+    });
+  }
+
+  next();
+};
+```
+
+Protected product routes use both middlewares:
+
+```javascript
+router.post(
+  "/",
+  authenticate,
+  isAdmin,
+  validate(createProductSchema),
+  productController.create
+);
+```
+
+```javascript
+router.put(
+  "/:id",
+  authenticate,
+  isAdmin,
+  validate(updateProductSchema),
+  productController.update
+);
+```
+
+```javascript
+router.delete(
+  "/:id",
+  authenticate,
+  isAdmin,
+  productController.remove
+);
+```
+
+## Validation
+
+The API uses Zod to validate incoming data.
+
+Product creation and update requests are validated before reaching the controller.
+
+This helps ensure that the API receives valid data and provides appropriate error responses when validation fails.
+
+## Password Security
+
+Passwords are hashed using `bcryptjs` before being stored.
+
+Plain-text passwords are not stored in the database/data files.
+
+## Error Handling
+
+The backend uses a centralized error-handling middleware to manage errors generated by the API.
+
+The frontend also displays error or confirmation messages to the user.
+
+Examples include:
+
+- Product added successfully
+- Product updated successfully
+- Product deleted successfully
+- Invalid credentials
+- Access denied
+- Validation errors
+
+## Testing
+
+The API routes were tested using Postman before integrating them with the frontend.
+
+The following functionality was tested:
+
+- User registration
+- User login
+- JWT authentication
+- Product listing
+- Product creation
+- Product update
+- Product deletion
+- Admin authorization
+- Unauthorized access
+- Invalid requests
+
+## Environment and Security
+
+Sensitive environment variables are stored in `.env`.
+
+The `.env` file and `node_modules` are excluded from the Git repository through `.gitignore`.
+
+Example `.gitignore`:
+
+```gitignore
+node_modules/
+.env
+```
+
+## Future Deployment
+
+The backend API will be deployed using Render.
+
+The deployed API URL will be added here once the deployment is completed:
+
+```text
+https://YOUR-API-URL.onrender.com
+```
+
+## Author
+
+K-Beauty Inventory Manager project developed as part of the ADA ITW course.

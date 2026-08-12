@@ -436,10 +436,11 @@ node_modules/
 
 The backend API is deployed on Render.
 
-API URL:
+[API URL](https://kbeauty-inventory-management-backend.onrender.com)
 
-https://kbeauty-inventory-management-api.onrender.com
+The frontend is deployed on Vercel.
 
+[Frontend](https://kbeauty-inventory-management-api.vercel.app/)
 
 ## Author
 

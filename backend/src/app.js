@@ -19,9 +19,7 @@ const { errorHandler } = require("./middlewares/error.middleware");
 const app = express();
 
 // Middleware
-app.use(cors({
-  origin: "https://kbeauty-inventory-management-api.vercel.app"
-}));
+app.use(cors());
 app.use(express.json());
 
 // Registers all user routes under the "/api/users" path

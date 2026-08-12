@@ -61,7 +61,7 @@ let editingProductId = null;
 const editProduct = async (productId) => {
   try {
     const response = await fetch(
-      `https://kbeauty-inventory-management-backend.onrender.com/api/products/${productId}`,
+      `https://localhost:3000/api/products/${productId}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -141,8 +141,8 @@ if (isAdmin) {
 
     try {
       const url = editingProductId
-        ? `https://kbeauty-inventory-management-backend.onrender.com/api/products/${editingProductId}`
-        : "https://kbeauty-inventory-management-backend.onrender.com/api/products";
+        ? `https://localhost:3000/api/products/${editingProductId}`
+        : "https://localhost:3000/api/products";
 
       const method = editingProductId ? "PUT" : "POST";
 
@@ -198,7 +198,7 @@ $logout.addEventListener("click", () => {
 
 // Fetches all products from the API
 const getProducts = async () => {
-  const response = await fetch("https://kbeauty-inventory-management-backend.onrender.com/api/products", {
+  const response = await fetch("localhost:3000/api/products", {
     headers: token
       ? {
           Authorization: `Bearer ${token}`,
@@ -261,7 +261,7 @@ const deleteProduct = async (productId) => {
 
   try {
     const response = await fetch(
-      `https://kbeauty-inventory-management-backend.onrender.com/api/products/${productId}`,
+      `https://localhost:3000/api/products/${productId}`,
       {
         method: "DELETE",
         headers: {

@@ -419,22 +419,6 @@ The following functionality was tested:
 - Unauthorized access
 - Invalid requests
 
-## GitHub
-
-Repository:
-
-```text
-YOUR_GITHUB_REPOSITORY_URL
-```
-
-## API Documentation
-
-API documentation can be accessed here:
-
-```text
-YOUR_API_DOCUMENTATION_URL
-```
-
 ## Environment and Security
 
 Sensitive environment variables are stored in `.env`.
